@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"math/big"
 )
 
 func main() {
@@ -13,5 +14,12 @@ func main() {
 
 	roundedSum := math.Round(floatSum)
 	fmt.Println("Rounded sum:", roundedSum)
+
+	var b1, b2, b3, bigSum big.Float
+	b1.SetFloat64(f1)
+	b2.SetFloat64(f2)
+	b3.SetFloat64(f3)
+	bigSum.Add(&b1, &b2).Add(&bigSum, &b3)
+	fmt.Printf("BigSum = %.10g\n", &bigSum)
 
 }
