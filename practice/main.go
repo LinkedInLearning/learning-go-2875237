@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
-	"math/big"
 )
 
 func main() {
