@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"math"
 	"os"
 	"strconv"
 	"strings"
@@ -28,6 +29,7 @@ func main() {
 	}
 
 	sum := float1 + float2
+	sum = math.Round(sum*100) / 100
 	fmt.Printf("The sum of %v and %v is %v\n\n", float1, float2, sum)
 
 }
