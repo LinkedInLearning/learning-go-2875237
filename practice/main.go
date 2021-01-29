@@ -5,6 +5,6 @@ import (
 )
 
 func main() {
-	var colors = []string{"Red", "Green", "Blue"}
+	var colors = [3]string{"Red", "Green", "Blue"}
 	fmt.Println(colors)
 }
