@@ -2,25 +2,19 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
-	"time"
 )
 
 func main() {
-	rand.Seed(time.Now().Unix())
+	poodle := Dog{"Poodle", 10}
+	fmt.Println(poodle)
+	fmt.Printf("%+v\n", poodle)
+	fmt.Printf("Breed: %v\nWeight: %v\n", poodle.Breed, poodle.Weight)
+	poodle.Weight = 9
+	fmt.Printf("Breed: %v\nWeight: %v\n", poodle.Breed, poodle.Weight)
+}
 
-	// fmt.Println("Day", dow)
-
-	var result string
-	switch dow := rand.Intn(7) + 1; dow {
-	case 1:
-		result = "It's Sunday!"
-		// fallthrough
-	case 2:
-		result = "It's Monday!"
-		// fallthrough
-	default:
-		result = "It's some other day!"
-	}
-	fmt.Println(result)
+// Dog is a struct
+type Dog struct {
+	Breed  string
+	Weight int
 }
