@@ -1,36 +1,68 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"math"
+	"os"
+	"strconv"
+	"strings"
 )
 
+var reader = bufio.NewReader(os.Stdin)
+
 func main() {
-	poodle := Dog{"Poodle", 10, "Woof!"}
-	fmt.Println(poodle)
-	fmt.Printf("%+v\n", poodle)
-	fmt.Printf("Breed: %v\nWeight: %v\n", poodle.Breed, poodle.Weight)
 
-	poodle.Speak()
-	poodle.Sound = "Arf!"
-	poodle.Speak()
-	poodle.SpeakThreeTimes()
-	poodle.SpeakThreeTimes()
+	value1 := getInput("Value 1")
+	value2 := getInput("Value 2")
+
+	var result float64
+
+	switch operation := getOperation(); operation {
+	case "+":
+		result = addValues(value1, value2)
+	case "-":
+		result = subtractValues(value1, value2)
+	case "*":
+		result = multiplyValues(value1, value2)
+	case "/":
+		result = divideValues(value1, value2)
+	default:
+		panic("Invalid operation")
+	}
+	result = math.Round(result*100) / 100
+	fmt.Printf("The result is %v\n\n", result)
 }
 
-// Dog is a struct
-type Dog struct {
-	Breed  string
-	Weight int
-	Sound  string
+func getInput(prompt string) float64 {
+	fmt.Printf("%v, ", prompt)
+	input, _ := reader.ReadString('\n')
+	value, err := strconv.ParseFloat(strings.TrimSpace(input), 64)
+	if err != nil {
+		message := fmt.Sprintf("%v must be a number", prompt)
+		panic(message)
+	}
+	return value
 }
 
-// Speak is how the dog speaks
-func (d Dog) Speak() {
-	fmt.Println(d.Sound)
+func getOperation() string {
+	fmt.Printf("Select an operation (+ - * /): ")
+	op, _ := reader.ReadString('\n')
+	return strings.TrimSpace(op)
 }
 
-// SpeakThreeTimes is how the dog speaks loudly
-func (d Dog) SpeakThreeTimes() {
-	d.Sound = fmt.Sprintf("%v %v %v", d.Sound, d.Sound, d.Sound)
-	fmt.Println(d.Sound)
+func addValues(value1, value2 float64) float64 {
+	return value1 + value2
+}
+
+func subtractValues(value1, value2 float64) float64 {
+	return value1 - value2
+}
+
+func multiplyValues(value1, value2 float64) float64 {
+	return value1 * value2
+}
+
+func divideValues(value1, value2 float64) float64 {
+	return value1 / value2
 }
